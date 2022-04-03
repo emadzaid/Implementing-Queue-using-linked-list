@@ -1,0 +1,97 @@
+using namespace std;
+
+struct node {
+    
+    int data;
+    struct node * next;
+};
+
+struct node * front = NULL;
+struct node * rear = NULL;
+
+bool isFull(struct node * ptr)
+{
+    return ptr == NULL;
+}
+
+bool isEmpty(struct node * front)
+{
+    return front == NULL;
+}
+
+void enqueue(int data)
+{
+    struct node * ptr = new node;
+    if(isFull(ptr)){
+        cout << "Queue overflow...\n";
+    }
+    else
+    {
+        ptr->data = data;
+        ptr->next = NULL;
+        if(front == NULL)
+        {
+            front = rear = ptr;
+        }
+        else
+        {
+            rear->next = ptr;
+            rear = rear->next;
+        }
+        
+    }
+    
+}
+
+int dequeue()
+{
+    struct node * ptr = front;
+    if(isEmpty(front))
+    {
+        cout << "Queue underflow...\n";
+        return -1;
+    }
+    else
+    {
+        int val = front->data;
+        front = front->next;
+        free(ptr);
+        return val;
+    }
+    
+}
+
+void displayQueue()
+{
+    struct node * ptr = front;
+    if(isEmpty(front))
+    {
+        cout << "Queue is Empty..\n";
+    }
+    else{
+    
+    while(ptr!=NULL)
+    {
+        cout << ptr -> data << endl;
+        ptr = ptr -> next;
+    }
+        
+    }
+}
+int main()
+{
+    enqueue(29);
+    enqueue(12);
+    enqueue(43);
+    enqueue(31);
+    enqueue(67);
+    
+    dequeue();
+    dequeue();
+    
+    displayQueue();
+        
+    cout <<  endl;
+    return 0;
+}
+
